@@ -1,0 +1,11 @@
+GET http://localhost:3000/api/groups
+
+###
+
+POST http://localhost:3000/api/groups
+
+###
+PUT http://localhost:3000/api/groups/1
+
+###
+DELETE http://localhost:3000/api/groups/1
