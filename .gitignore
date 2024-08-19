@@ -1,3 +1,10 @@
+# Ignore node_modules directory
 node_modules/
+
+# 
 test-api.http
+
+# Ignore .env files
+*.env
+*.venv
 
