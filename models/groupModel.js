@@ -6,10 +6,10 @@ const prisma = new PrismaClient();
 
 // 그룹 생성 스키마 설정
 const CreateGroup = s.object({
-  name: s.size(s.string(), 1, 30),
-  description: s.size(s.string(), 0, 250),
-  isPublic: s.boolean(),
-  password: s.string(),
+    name: s.size(s.string(), 1, 30),
+    description: s.size(s.string(), 0, 250),
+    isPublic: s.boolean(),
+    password: s.string(),
 });
 
 // 그룹 수정 스키마 설정
@@ -20,7 +20,7 @@ const PatchGroup = s.partial(CreateGroup);
 export const createGroup = async (data) => {
     // 유효성 검사
     s.assert(data, CreateGroup);
-    
+
     return prisma.group.create({
         data,
     });
@@ -28,13 +28,21 @@ export const createGroup = async (data) => {
 
 // 그룹 목록 조회
 export const getAllGroups = async () => {
-    return prisma.group.findMany();
+    return prisma.group.findMany({
+        include: {
+            _count: {
+                select: {
+                    badges: true // 각 그룹의 뱃지 수를 집계합니다.
+                }
+            }
+        }
+    });
 };
 
 // 그룹 수정
 export const updateGroup = async (id, data) => {
     s.assert(data, PatchGroup);
-    
+
     return prisma.group.update({
         where: { id },
         data,
@@ -50,6 +58,17 @@ export const deleteGroup = async (id) => {
 export const getGroupById = async (id) => {
     return prisma.group.findUnique({
         where: { id },
+        include: {
+            badges: {
+                select: {
+                    badge: {
+                        select: {
+                            name: true
+                        }
+                    }
+                }
+            }
+        }
     });
 };
 
@@ -59,6 +78,6 @@ export const getGroupPasswordById = async (id) => {
         where: { id },
         select: { password: true },
     });
-    
+
     return group?.password;
 };
