@@ -15,4 +15,10 @@ router.put("/:groupId", groupController.updateGroup);
 // 그룹 삭제
 router.delete("/:groupId", groupController.deleteGroup);
 
+// 그룹 상세 정보 확인
+router.get("/:groupId", groupController.getGroupDetail);
+
+// 그룹 조회 권한 확인
+router.post("/:groupId/verify-password", groupController.checkGroupAccess)
+
 export default router;

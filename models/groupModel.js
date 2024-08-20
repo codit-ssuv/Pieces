@@ -45,3 +45,20 @@ export const updateGroup = async (id, data) => {
 export const deleteGroup = async (id) => {
     return prisma.group.delete({ where: { id } });
 };
+
+// 그룹 상세 정보 확인
+export const getGroupById = async (id) => {
+    return prisma.group.findUnique({
+        where: { id },
+    });
+};
+
+// 그룹 조회 권한 확인
+export const getGroupPasswordById = async (id) => {
+    const group = await prisma.group.findUnique({
+        where: { id },
+        select: { password: true },
+    });
+    
+    return group?.password;
+};
