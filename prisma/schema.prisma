@@ -19,10 +19,12 @@ model Group {
   description String?
   isPublic    Boolean  @default(true)
   password    String?
+  badgesCount Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  badges      GroupBadge[]
+  badges GroupBadge[]
+  memory Memory[]
 }
 
 model GroupBadge {
@@ -31,13 +33,45 @@ model GroupBadge {
   badgeId   Int
   grantedAt DateTime @default(now())
 
-  group     Group   @relation(fields: [groupId], references: [id])
-  badge     Badge   @relation(fields: [badgeId], references: [id])
+  group Group @relation(fields: [groupId], references: [id])
+  badge Badge @relation(fields: [badgeId], references: [id])
 }
 
 model Badge {
-  id          Int      @id @default(autoincrement())
-  name        String
+  id   Int    @id @default(autoincrement())
+  name String
 
-  groups      GroupBadge[]
+  groups GroupBadge[]
+}
+
+model Memory {
+  id           String   @id @default(uuid())
+  nickname     String
+  title        String
+  content      String
+  tags         String[] // 태그를 배열 형태로 저장. Prisma에서 제공.
+  location     String
+  memoryMoment DateTime
+  isPublic     Boolean  @default(true)
+  password     String
+  likes        Int      @default(0)
+  commentCount Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  groupId      String
+
+  group    Group     @relation(fields: [groupId], references: [id])
+  comments Comment[]
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  nickname  String
+  content   String
+  password  String
+  memoryId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  memory Memory @relation(fields: [memoryId], references: [id])
 }

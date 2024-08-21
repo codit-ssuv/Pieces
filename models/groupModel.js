@@ -28,15 +28,7 @@ export const createGroup = async (data) => {
 
 // 그룹 목록 조회
 export const getAllGroups = async () => {
-    return prisma.group.findMany({
-        include: {
-            _count: {
-                select: {
-                    badges: true // 각 그룹의 뱃지 수를 집계합니다.
-                }
-            }
-        }
-    });
+    return prisma.group.findMany();
 };
 
 // 그룹 수정
