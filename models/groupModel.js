@@ -73,3 +73,25 @@ export const getGroupPasswordById = async (id) => {
 
     return group?.password;
 };
+
+// 그룹 공감하기
+export const likeGroup = async (id) => {
+    return prisma.group.update({
+        where: { id: id },
+        data: {
+            likes: {
+                increment: 1
+            },
+        },
+    });
+}
+
+// 그룹 공개 여부 확인
+export const checkGroupPublic = async (id) => {
+    const group = await prisma.group.findUnique({
+        where: { id: id },
+        select: { isPublic: true },
+    });
+
+    return group?.isPublic;
+}

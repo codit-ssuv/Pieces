@@ -20,6 +20,7 @@ model Group {
   isPublic    Boolean  @default(true)
   password    String?
   badgesCount Int      @default(0)
+  likes       Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

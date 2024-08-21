@@ -19,6 +19,12 @@ router.delete("/:groupId", groupController.deleteGroup);
 router.get("/:groupId", groupController.getGroupDetail);
 
 // 그룹 조회 권한 확인
-router.post("/:groupId/verify-password", groupController.checkGroupAccess)
+router.post("/:groupId/verify-password", groupController.checkGroupAccess);
+
+// 그룹 공감하기
+router.post("/:groupId/like", groupController.likeGroup);
+
+// 그룹 공개 여부 확인
+router.get("/:groupId/is-public", groupController.checkGroupPublic);
 
 export default router;
