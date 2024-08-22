@@ -1,9 +1,11 @@
 import { createGroup, getAllGroups, updateGroup as updateGroupInDB, deleteGroup as deleteGroupInDB, getGroupById, getGroupPasswordById, likeGroup as likeGroupInDB, checkGroupPublic as checkGroupPublicInDB } from '../models/groupModel.js';
+import bcrypt from 'bcrypt';
 
 
 // 그룹 등록
 export const registerGroup = async (req, res) => {
     const data = req.body;
+    data.password = await bcrypt.hash(data.password, 10);
     const group = await createGroup(data);
     res.status(201).send(group);
 };
@@ -19,6 +21,7 @@ export const getGroups = async (req, res) => {
 export const updateGroup = async (req, res) => {
     const { groupId } = req.params;
     const data = req.body;
+    data.password = await bcrypt.hash(data.password, 10);
 
     const group = await updateGroupInDB(groupId, data);
     res.send(group);
@@ -44,7 +47,7 @@ export const checkGroupAccess = async (req, res) => {
     const { password } = req.body;
     const groupPassword = await getGroupPasswordById(groupId);
 
-    res.send((password === groupPassword));
+    res.send((await bcrypt.compare(password, groupPassword)));
 };
 
 // 그룹 공감하기
