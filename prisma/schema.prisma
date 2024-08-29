@@ -52,7 +52,7 @@ model Memory {
   content      String
   tags         String[] // 태그를 배열 형태로 저장. Prisma에서 제공.
   location     String
-  memoryMoment DateTime
+  memoryMoment DateTime?
   isPublic     Boolean  @default(true)
   password     String
   likes        Int      @default(0)

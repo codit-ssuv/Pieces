@@ -1,5 +1,6 @@
 import express from 'express';
 import * as groupController from '../controllers/groupController.js';
+import * as memoryController from '../controllers/memoryController.js';
 import { Prisma } from '@prisma/client';
 
 const router = express.Router();
@@ -50,5 +51,11 @@ router.post("/:groupId/like", asyncHandler(groupController.likeGroup));
 
 // 그룹 공개 여부 확인
 router.get("/:groupId/is-public", asyncHandler(groupController.checkGroupPublic));
+
+// 게시글 등록
+router.post("/:groupId/posts", asyncHandler(memoryController.createPost));
+
+// 게시글 목록 조회
+router.get("/:groupId/posts", asyncHandler(memoryController.getPosts));
 
 export default router;

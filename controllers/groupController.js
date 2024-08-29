@@ -56,7 +56,7 @@ export const likeGroup = async (req, res) => {
     const group = await likeGroupInDB(groupId);
 
     res.send(group);
-}
+};
 
 // 그룹 공개 여부 확인
 export const checkGroupPublic = async (req, res) => {
@@ -64,4 +64,4 @@ export const checkGroupPublic = async (req, res) => {
     const groupPublic = await checkGroupPublicInDB(groupId);
     
     res.send(groupPublic);
-}
+};
