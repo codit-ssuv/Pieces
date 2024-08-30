@@ -53,9 +53,9 @@ router.post("/:groupId/like", asyncHandler(groupController.likeGroup));
 router.get("/:groupId/is-public", asyncHandler(groupController.checkGroupPublic));
 
 // 게시글 등록
-router.post("/:groupId/posts", asyncHandler(memoryController.createPost));
+router.post("/:groupId/posts", asyncHandler(memoryController.createMemory));
 
 // 게시글 목록 조회
-router.get("/:groupId/posts", asyncHandler(memoryController.getPosts));
+router.get("/:groupId/posts", asyncHandler(memoryController.getMemorys));
 
 export default router;

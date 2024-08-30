@@ -76,7 +76,7 @@ export const checkGroupAccess = async (req, res) => {
 // 그룹 공감하기
 export const likeGroup = async (req, res) => {
     const { groupId } = req.params;
-    const group = await likeGroupInDB(groupId);
+    await likeGroupInDB(groupId);
 
     res.send({ message: "그룹 공감하기 성공" });
 };

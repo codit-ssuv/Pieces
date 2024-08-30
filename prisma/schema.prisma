@@ -52,7 +52,7 @@ model Post {
   content      String
   tags         String[] // 태그를 배열 형태로 저장. Prisma에서 제공.
   location     String
-  moment       DateTime?
+  moment       String?
   isPublic     Boolean   @default(true)
   password     String
   likeCount    Int       @default(0)

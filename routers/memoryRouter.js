@@ -28,21 +28,21 @@ function asyncHandler(handler) {
   
 
 // 게시글 수정
-router.put("/:postId", asyncHandler(memoryController.updatePost));
+router.put("/:postId", asyncHandler(memoryController.updateMemory));
 
 // 게시글 삭제
-router.delete("/:postId", asyncHandler(memoryController.deletePost));
+router.delete("/:postId", asyncHandler(memoryController.deleteMemory));
 
 // 게시글 상세 정보 조회
-router.get("/:postId", asyncHandler(memoryController.getPostDetail));
+router.get("/:postId", asyncHandler(memoryController.getMemoryDetail));
 
 // 게시글 조회 권한 확인
-router.post("/:postId/verify-password", asyncHandler(memoryController.checkPostAccess));
+router.post("/:postId/verify-password", asyncHandler(memoryController.checkMemoryAccess));
 
 // 게시글 공감하기
-router.post("/:postId/like", asyncHandler(memoryController.likePost));
+router.post("/:postId/like", asyncHandler(memoryController.likeMemory));
 
 // 게시글 공개 여부 확인하기
-router.get("/:postId/is-public", asyncHandler(memoryController.checkPostPublic));
+router.get("/:postId/is-public", asyncHandler(memoryController.checkMemoryPublic));
 
 export default router;
