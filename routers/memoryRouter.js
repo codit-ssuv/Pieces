@@ -33,4 +33,16 @@ router.put("/:postId", asyncHandler(memoryController.updatePost));
 // 게시글 삭제
 router.delete("/:postId", asyncHandler(memoryController.deletePost));
 
+// 게시글 상세 정보 조회
+router.get("/:postId", asyncHandler(memoryController.getPostDetail));
+
+// 게시글 조회 권한 확인
+router.post("/:postId/verify-password", asyncHandler(memoryController.checkPostAccess));
+
+// 게시글 공감하기
+router.post("/:postId/like", asyncHandler(memoryController.likePost));
+
+// 게시글 공개 여부 확인하기
+router.get("/:postId/is-public", asyncHandler(memoryController.checkPostPublic));
+
 export default router;
