@@ -56,7 +56,6 @@ model Post {
   isPublic     Boolean   @default(true)
   password     String
   likeCount    Int       @default(0)
-  commentCount Int       @default(0)
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 

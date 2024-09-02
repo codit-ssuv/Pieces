@@ -17,7 +17,6 @@ export const createMemory = async (req, res) => {
 
     // groupPassword 필드를 제외한 나머지 데이터 준비
     const { groupPassword, ...dataWithoutGroupPassword } = data;
-    console.log(dataWithoutGroupPassword, groupId);
     const Post = await createPost(dataWithoutGroupPassword, groupId);
 
     res.status(201).send(Post);

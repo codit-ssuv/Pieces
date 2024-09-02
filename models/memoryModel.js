@@ -45,7 +45,7 @@ export const createPost = async (data, groupId) => {
         moment: post.moment,
         isPublic: post.isPublic,
         likeCount: post.likeCount,
-        commentCount: post.commentCount,
+        commentCount: 0,
         createdAt: post.createdAt,
     };
 };
@@ -79,30 +79,25 @@ export const getAllPosts = async (groupId, page = 1, pageSize = 10) => {
             moment: true,
             isPublic: true,
             likeCount: true,
-            commentCount: true,
             createdAt: true,
+            _count: {
+                select: {
+                    comments: true,
+                },
+            },
         },
     });
 
-    const formattedPosts = posts.map(post => ({
-        id: post.id,
-        nickname: post.nickname,
-        title: post.title,
-        // imageUrl: post.imageUrl || '',
-        tags: post.tags,
-        location: post.location,
-        moment: post.moment,
-        isPublic: post.isPublic,
-        likeCount: post.likeCount,
-        commentCount: post.commentCount,
-        createdAt: post.createdAt,
+    const data = posts.map(({ _count: { comments: commentCount }, ...post }) => ({
+        ...post,
+        commentCount,
     }));
 
     return {
         currentPage,
         totalPages: Math.ceil(totalItemCount / itemsPerPage),
         totalItemCount,
-        data: formattedPosts,
+        data: data,
     };
 };
 // 게시글 수정
@@ -113,6 +108,13 @@ export const updatePost = async (id, data) => {
     const updatedPost = await prisma.post.update({
         where: { id },
         data,
+        include: {
+            _count: {
+                select: {
+                    comments: true,
+                },
+            },
+        },
     });
 
     return {
@@ -127,7 +129,7 @@ export const updatePost = async (id, data) => {
         moment: updatedPost.moment,
         isPublic: updatedPost.isPublic,
         likeCount: updatedPost.likeCount,
-        commentCount: updatedPost.commentCount,
+        commentCount: updatedPost._count.comments,
         createdAt: updatedPost.createdAt,
     };
 
@@ -143,6 +145,13 @@ export const deletePost = async (id) => {
 export const getPostById = async (id) => {
     const post = await prisma.post.findUnique({
         where: { id },
+        include: {
+            _count: {
+                select: {
+                    comments: true,
+                },
+            },
+        },
     });
 
     return {
@@ -157,7 +166,7 @@ export const getPostById = async (id) => {
         moment: post.moment,
         isPublic: post.isPublic,
         likeCount: post.likeCount,
-        commentCount: post.commentCount,
+        commentcount: post._count.comments,
         createdAt: post.createdAt,
     };
 };
