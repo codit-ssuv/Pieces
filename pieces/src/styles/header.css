@@ -1,15 +1,43 @@
 .header {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column; /* 세로 방향으로 정렬 */
     padding: 20px;
     background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
 }
 
+.top-row {
+    display: flex;
+    align-items: center;
+    padding-bottom: 66px;
+}
+
+
 .logo {
-    font-size: 24px;
-    font-weight: bold;
+    margin: 0 auto; /* 가운데 정렬 */
+}
+
+.cta-button {
+    width: 200px;
+    height: 45px;
+    border: none;
+    border-radius: 6px;
+    background-color: #282828;
+    color: white; 
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #282828; /* 호버 시 배경색 변경 */
+}
+
+.bottom-row {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    margin-top: 10px; 
 }
 
 .search-bar {
@@ -24,12 +52,15 @@
     margin-right: 10px;
 }
 
-.filter {
+.dropdown {
     display: flex;
     align-items: center;
+    width: 160px;
+    height: 45px;
+    font-size: 14px;
 }
 
-.filter select {
+.dropdown select {
     margin-left: 10px;
 }
 
