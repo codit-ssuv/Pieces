@@ -8,6 +8,7 @@ const prisma = new PrismaClient();
 const CreatePost = s.object({
     nickname: s.size(s.string(), 1, 10),
     title: s.size(s.string(), 1, 30),
+    imageUrl: s.string(),
     content: s.string(),
     tags: s.array(s.string()),
     location: s.string(),
@@ -25,7 +26,6 @@ export const createPost = async (data, groupId) => {
     // 유효성 검사
     s.assert(data, CreatePost);
 
-    console.log(data, groupId);
     const post = await prisma.post.create({
         data: {
             ...data,
@@ -39,7 +39,7 @@ export const createPost = async (data, groupId) => {
         nickname: post.nickname,
         title: post.title,
         content: post.content,
-        // imageUrl: post.imageUrl || '',
+        imageUrl: post.imageUrl,
         tags: post.tags,
         location: post.location,
         moment: post.moment,
@@ -74,6 +74,7 @@ export const getAllPosts = async (groupId, page = 1, pageSize = 10) => {
             id: true,
             nickname: true,
             title: true,
+            imageUrl: true,
             tags: true,
             location: true,
             moment: true,
@@ -123,7 +124,7 @@ export const updatePost = async (id, data) => {
         nickname: updatedPost.nickname,
         title: updatedPost.title,
         content: updatedPost.content,
-        // imageUrl: updatedPost.imageUrl || '',
+        imageUrl: updatedPost.imageUrl,
         tags: updatedPost.tags,
         location: updatedPost.location,
         moment: updatedPost.moment,
@@ -160,7 +161,7 @@ export const getPostById = async (id) => {
         nickname: post.nickname,
         title: post.title,
         content: post.content,
-        // imageUrl: post.imageUrl || '',
+        imageUrl: post.imageUrl,
         tags: post.tags,
         location: post.location,
         moment: post.moment,

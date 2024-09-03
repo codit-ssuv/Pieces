@@ -16,6 +16,7 @@ datasource db {
 model Group {
   id           String   @id @default(uuid())
   name         String
+  imageUrl     String?
   isPublic     Boolean  @default(true)
   likeCount    Int      @default(0)
   password     String?
@@ -23,8 +24,8 @@ model Group {
   updatedAt    DateTime @updatedAt
   introduction String?
 
-  badges GroupBadge[]
-  posts Post[]
+  badges GroupBadge[] 
+  posts  Post[]
 }
 
 model GroupBadge {
@@ -33,7 +34,7 @@ model GroupBadge {
   badgeId   Int
   grantedAt DateTime @default(now())
 
-  group Group @relation(fields: [groupId], references: [id])
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
   badge Badge @relation(fields: [badgeId], references: [id])
 }
 
@@ -45,21 +46,22 @@ model Badge {
 }
 
 model Post {
-  id           String    @id @default(uuid())
-  groupId      String
-  nickname     String
-  title        String
-  content      String
-  tags         String[] // 태그를 배열 형태로 저장. Prisma에서 제공.
-  location     String
-  moment       String?
-  isPublic     Boolean   @default(true)
-  password     String
-  likeCount    Int       @default(0)
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  id        String   @id @default(uuid())
+  groupId   String
+  nickname  String
+  title     String
+  imageUrl  String?
+  content   String
+  tags      String[] // 태그를 배열 형태로 저장. Prisma에서 제공.
+  location  String
+  moment    String?
+  isPublic  Boolean  @default(true)
+  password  String
+  likeCount Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  group    Group     @relation(fields: [groupId], references: [id])
+  group    Group     @relation(fields: [groupId], references: [id], onDelete: Cascade)
   comments Comment[]
 }
 
@@ -68,9 +70,9 @@ model Comment {
   nickname  String
   content   String
   password  String
-  postId  String
+  postId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  post Post @relation(fields: [postId], references: [id])
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 }

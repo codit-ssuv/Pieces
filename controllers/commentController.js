@@ -24,11 +24,11 @@ export const getComments = async (req, res) => {
 // 댓글 수정
 export const updateComment = async (req, res) => {
     const { commentId } = req.params;
-    const data = req.body;
+    const { password, ...data } = req.body;
 
     // 비밀번호 체크
     const commentPassword = await getCommentPasswordById(commentId);
-    const isPasswordCorrect = await bcrypt.compare(data.password, commentPassword);
+    const isPasswordCorrect = await bcrypt.compare(password, commentPassword);
 
     if (!isPasswordCorrect) {
         return res.status(403).send({ message: "비밀번호가 틀렸습니다" });
@@ -45,6 +45,7 @@ export const deleteComment = async (req, res) => {
 
     // 비밀번호 체크
     const commentPassword = await getCommentPasswordById(commentId);
+    console.log(commentPassword, data.password);
     const isPasswordCorrect = await bcrypt.compare(data.password, commentPassword);
 
     if (!isPasswordCorrect) {
