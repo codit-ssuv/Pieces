@@ -7,7 +7,7 @@
     height: 2048px;
   }
   
-  header {
+  .header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
@@ -48,10 +48,10 @@
   }
 
   .divider {
-    width: 1px; /* 선의 너비 */
-    height: 20px; /* 선의 높이 */
-    background-color: #ccc; /* 선의 색상 */
-    margin: 0 10px; /* 선 양쪽 여백 */
+    width: 1px; 
+    height: 20px;
+    background-color: #ccc; 
+    margin: 0 10px; 
   }
 
   .card-title {
@@ -95,7 +95,20 @@
     font-weight: 400;
   }
 
+  .likes-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .flower-icon {
+    margin-bottom: 100px;
+  }
   
+  .likes {
+    margin-top: 0px;
+  }
+
   
   .load-more {
     margin-top: 60px;

@@ -45,17 +45,17 @@ const Card = ({ title, description, imageUrl, date, category, badges, memories, 
       <div className="card-meta2">
         <div>
           <span>획득 배지</span>
-          <div>{badges}</div>
+          <div className='badges'>{badges}</div>
         </div>
         <div>
           <span>추억</span>
-          <div>{memories}</div>
+          <div className='memories'>{memories}</div>
         </div>
         <div>
           <span>그룹 공감</span>
-          <div className="likes">
+          <div className="likes-container">
             <img src={FlowerIcon} alt="flower icon" className="flower-icon" />
-            {likes}
+            <div className="likes">{likes}</div>
           </div>
         </div>
       </div>

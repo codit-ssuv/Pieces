@@ -5,11 +5,13 @@ import Public from './pages/public';
 import "./styles/public.css";
 import Private from './pages/private';
 import "./styles/private.css";
+import MakeGroup from './pages/makeGroup';
+import "./styles/makeGroup.css";
 
 
 ReactDOM.render(
   <React.StrictMode>
-        <Public />
+        <MakeGroup />
   </React.StrictMode>,
   document.getElementById('root')
 );
