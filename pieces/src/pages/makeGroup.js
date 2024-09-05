@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import '../styles/makeGroup.css'
+import toggleOn from '../assets/toggleOn.svg';
+import toggleOff from '../assets/toggleOff.svg';
 
 const MakeGroup = () => {
     const [groupName, setGroupName] = useState('');
@@ -27,22 +30,24 @@ const MakeGroup = () => {
             <h2>그룹 만들기</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>그룹명</label>
+                    <label className='subtitle'>그룹명</label>
                     <input 
                         type="text" 
                         value={groupName} 
                         onChange={(e) => setGroupName(e.target.value)} 
                         required 
+                        className='groupName-container'
                     />
                 </div>
                 <div className="image-upload">
-                    <label>대표 이미지</label>
+                    <label className='subtitle'>대표 이미지</label>
                     <div className='file-container'>
                         <input 
                             type="text" 
                             value={groupImage ? groupImage.name : ''} 
                             readOnly 
                             placeholder="파일을 선택해 주세요" 
+                            className='file-select'
                         />
                         <input 
                             type="file" 
@@ -57,32 +62,36 @@ const MakeGroup = () => {
                     </div>
                 </div>
                 <div>
-                    <label>그룹 소개</label>
+                    <label className='subtitle'>그룹 소개</label>
                     <textarea 
                         value={groupDescription} 
                         onChange={(e) => setGroupDescription(e.target.value)} 
                         required 
-                        id="group-intro" 
+                        placeholder="그룹을 소개해 주세요"
+                        className='groupDescription-container'
                     />
                 </div>
                 <div>
-                    <label>그룹 공개 선택</label>
-                    <label>
+                    <label className='subtitle'>그룹 공개 선택</label>
+                    <label  className='public-container'>
                         공개
-                        <input 
-                            type="checkbox" 
-                            checked={isPublic} 
-                            onChange={() => setIsPublic(!isPublic)} 
+                        <div onClick={() => setIsPublic(!isPublic)} style={{ cursor: 'pointer' }}>
+                        <img 
+                            src={isPublic ? toggleOn : toggleOff} 
+                            alt="Toggle Public" 
+                            className='toggle'
                         />
+                    </div>
                     </label>
                 </div>
                 <div>
-                    <label>비밀번호</label>
+                    <label className='subtitle'>비밀번호</label>
                     <input 
                         type="password" 
                         value={password} 
                         onChange={(e) => setPassword(e.target.value)} 
                         placeholder="비밀번호를 입력해 주세요"
+                        className='password-container'
                     />
                 </div>
                 <button type="submit">만들기</button>
