@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import "../styles/privateGroupAccess.css";
+import "../styles/privateMemory.css";
 
-const PrivateGroupAccess = () => {
+const PrivateMemory = () => {
   const [password, setPassword] = useState('');
 
   const handleChange = (e) => {
@@ -16,8 +16,8 @@ const PrivateGroupAccess = () => {
 
   return (
     <div className="container">
-      <h1 className="title">비공개 그룹</h1>
-      <p className="description">비공개 그룹에 접근하기 위해 관련 확인이 필요합니다.</p>
+      <h1 className="title">비공개 추억</h1>
+      <p className="description">비공개 추억에 접근하기 위해 관련 확인이 필요합니다.</p>
       <form onSubmit={handleSubmit} className="form">
         <label className="label">
           비밀번호를 입력해 주세요
@@ -38,4 +38,4 @@ const PrivateGroupAccess = () => {
   );
 };
 
-export default PrivateGroupAccess;
+export default PrivateMemory;
