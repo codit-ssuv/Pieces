@@ -7,11 +7,13 @@ import Private from './pages/private';
 import "./styles/private.css";
 import MakeGroup from './pages/makeGroup';
 import "./styles/makeGroup.css";
+import PrivateGroupAccess from './pages/privateGroupAccess';
+import MemoryUpload from './pages/memoryUpload';
 
 
 ReactDOM.render(
   <React.StrictMode>
-        <MakeGroup />
+        <MemoryUpload/>
   </React.StrictMode>,
   document.getElementById('root')
 );
