@@ -1,0 +1,140 @@
+.create-group {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+.create-group h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -3%;
+}
+
+
+.subtitle {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.groupName-container {
+    width: 380px;
+    height: 45px;
+    border-radius: 6px;
+    border: 1px solid #282828;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    padding-left: 20px;
+    font-size: 14px;
+}
+
+
+.file-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+.file-container input[type="text"] {
+    flex: 1;
+    border: 1px solid #DDDDDD; 
+    border-radius: 6px; 
+    background-color:#FAFAFA;
+    width: 290px;
+    height: 45px;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.file-select::placeholder {
+    color: #B8B8B8; 
+    padding-left: 20px;
+}
+
+.upload-button {
+    background-color: #FAFAFA;
+    color: #282828;
+    border: 1px solid #282828;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    line-height: 45px;
+}
+
+.upload-button:hover {
+    background-color: #FAFAFA;
+}
+
+
+.groupDescription-container {
+    width: 380px;
+    height: 106px;
+    border-radius: 6px;
+    border: 1px solid #DDDDDD;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    font-size: 14px;
+    padding-left: 20px;
+    padding-top: 14px;
+}
+
+.groupDescription-container::placeholder {
+    color: #B8B8B8; 
+    font-size: 14px;
+}
+
+.public-container {
+    font-weight: 400px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 23px;
+    margin-bottom: 40px;
+}
+
+.toggle {
+    width: 48px;
+    height: 24px;
+}
+
+
+
+.password-container {
+    width: 380px;
+    height: 45px;
+    border-radius: 6px;
+    border: 1px solid #DDDDDD;
+    margin-top: 10px;
+    margin-bottom: 60px;
+    font-size: 14px;
+    padding-left: 20px;
+}
+
+.password-container::placeholder {
+    color: #B8B8B8; 
+}
+
+
+.create-group button {
+    width: 400px;
+    height: 50px;
+    padding: 10px;
+    background-color: #282828;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.create-group button:hover {
+    background-color: #000000;
+}
