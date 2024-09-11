@@ -8,6 +8,7 @@ const prisma = new PrismaClient();
 const CreatePost = s.object({
     nickname: s.size(s.string(), 1, 10),
     title: s.size(s.string(), 1, 30),
+    imageUrl: s.string(),
     content: s.string(),
     tags: s.array(s.string()),
     location: s.string(),
@@ -25,7 +26,6 @@ export const createPost = async (data, groupId) => {
     // 유효성 검사
     s.assert(data, CreatePost);
 
-    console.log(data, groupId);
     const post = await prisma.post.create({
         data: {
             ...data,
@@ -39,13 +39,13 @@ export const createPost = async (data, groupId) => {
         nickname: post.nickname,
         title: post.title,
         content: post.content,
-        // imageUrl: post.imageUrl || '',
+        imageUrl: post.imageUrl,
         tags: post.tags,
         location: post.location,
         moment: post.moment,
         isPublic: post.isPublic,
         likeCount: post.likeCount,
-        commentCount: post.commentCount,
+        commentCount: 0,
         createdAt: post.createdAt,
     };
 };
@@ -74,35 +74,31 @@ export const getAllPosts = async (groupId, page = 1, pageSize = 10) => {
             id: true,
             nickname: true,
             title: true,
+            imageUrl: true,
             tags: true,
             location: true,
             moment: true,
             isPublic: true,
             likeCount: true,
-            commentCount: true,
             createdAt: true,
+            _count: {
+                select: {
+                    comments: true,
+                },
+            },
         },
     });
 
-    const formattedPosts = posts.map(post => ({
-        id: post.id,
-        nickname: post.nickname,
-        title: post.title,
-        // imageUrl: post.imageUrl || '',
-        tags: post.tags,
-        location: post.location,
-        moment: post.moment,
-        isPublic: post.isPublic,
-        likeCount: post.likeCount,
-        commentCount: post.commentCount,
-        createdAt: post.createdAt,
+    const data = posts.map(({ _count: { comments: commentCount }, ...post }) => ({
+        ...post,
+        commentCount,
     }));
 
     return {
         currentPage,
         totalPages: Math.ceil(totalItemCount / itemsPerPage),
         totalItemCount,
-        data: formattedPosts,
+        data: data,
     };
 };
 // 게시글 수정
@@ -113,6 +109,13 @@ export const updatePost = async (id, data) => {
     const updatedPost = await prisma.post.update({
         where: { id },
         data,
+        include: {
+            _count: {
+                select: {
+                    comments: true,
+                },
+            },
+        },
     });
 
     return {
@@ -121,13 +124,13 @@ export const updatePost = async (id, data) => {
         nickname: updatedPost.nickname,
         title: updatedPost.title,
         content: updatedPost.content,
-        // imageUrl: updatedPost.imageUrl || '',
+        imageUrl: updatedPost.imageUrl,
         tags: updatedPost.tags,
         location: updatedPost.location,
         moment: updatedPost.moment,
         isPublic: updatedPost.isPublic,
         likeCount: updatedPost.likeCount,
-        commentCount: updatedPost.commentCount,
+        commentCount: updatedPost._count.comments,
         createdAt: updatedPost.createdAt,
     };
 
@@ -143,6 +146,13 @@ export const deletePost = async (id) => {
 export const getPostById = async (id) => {
     const post = await prisma.post.findUnique({
         where: { id },
+        include: {
+            _count: {
+                select: {
+                    comments: true,
+                },
+            },
+        },
     });
 
     return {
@@ -151,13 +161,13 @@ export const getPostById = async (id) => {
         nickname: post.nickname,
         title: post.title,
         content: post.content,
-        // imageUrl: post.imageUrl || '',
+        imageUrl: post.imageUrl,
         tags: post.tags,
         location: post.location,
         moment: post.moment,
         isPublic: post.isPublic,
         likeCount: post.likeCount,
-        commentCount: post.commentCount,
+        commentcount: post._count.comments,
         createdAt: post.createdAt,
     };
 };

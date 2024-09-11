@@ -8,6 +8,7 @@ const prisma = new PrismaClient();
 const CreateGroup = s.object({
     name: s.size(s.string(), 1, 30),
     introduction: s.size(s.string(), 0, 250),
+    imageUrl: s.string(),
     isPublic: s.boolean(),
     password: s.string(),
 });
@@ -28,7 +29,7 @@ export const createGroup = async (data) => {
     return {
         id: group.id,
         name: group.name,
-        // imageUrl: group.imageUrl,
+        imageUrl: group.imageUrl,
         isPublic: group.isPublic,
         likeCount: group.likeCount,
         badges: [],
@@ -49,7 +50,7 @@ export const getAllGroups = async (page = 1, pageSize = 10) => {
         select: {
             id: true,
             name: true,
-            // imageUrl: true,
+            imageUrl: true,
             isPublic: true,
             likeCount: true,
             badges: true,
@@ -106,7 +107,7 @@ export const updateGroup = async (id, data) => {
     return {
         id: group.id,
         name: group.name,
-        // imageUrl: group.imageUrl,
+        imageUrl: group.imageUrl,
         isPublic: group.isPublic,
         likeCount: group.likeCount,
         badges: group.badges.map(b => b.badge.name),
@@ -146,7 +147,7 @@ export const getGroupById = async (id) => {
     return {
         id: group.id,
         name: group.name,
-        // imageUrl: group.imageUrl,
+        imageUrl: group.imageUrl,
         isPublic: group.isPublic,
         likeCount: group.likeCount,
         badges: group.badges.map(b => b.badge.name),

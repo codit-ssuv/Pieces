@@ -1,5 +1,6 @@
 import express from 'express';
 import * as memoryController from '../controllers/memoryController.js';
+import * as commentController from '../controllers/commentController.js';
 import { Prisma } from '@prisma/client';
 
 const router = express.Router();
@@ -44,5 +45,11 @@ router.post("/:postId/like", asyncHandler(memoryController.likeMemory));
 
 // 게시글 공개 여부 확인하기
 router.get("/:postId/is-public", asyncHandler(memoryController.checkMemoryPublic));
+
+// 댓글 등록
+router.post("/:postId/comments", asyncHandler(commentController.createComment));
+
+// 댓글 목록 조회
+router.get("/:postId/comments", asyncHandler(commentController.getComments));
 
 export default router;
